@@ -37,29 +37,11 @@ function App() {
     },
   ]);
 
-  const [user,setUser] = useState([
-    {
-      id:1,
-      img:pbk
-    },
-  ])
-
-  const [test,setTest] = useState({
-    id:{
-      test:1
-    }
-  })
-
-
-  const userRef = useRef()
-
 
   const [current,setCurrent] = useState(0)
 
-  // function settingCurrent(){
-      // const 
-  // }
 
+  // 필요없는 부분 시작
   const [trigger,setTrigger] = useState(true)
 
   function handleScroll(e){
@@ -70,6 +52,7 @@ function App() {
       },1000)
     }
   }
+  // 필요없는 부분 끝
 
   return (
     <div 
@@ -91,7 +74,7 @@ function App() {
 
       <div 
       className="user"
-      style={{top:current * (window.innerHeight) + 550}}
+      style={{top:current * (window.innerHeight) + 650}}
       >
         <div>
           {current+1} 페이지
