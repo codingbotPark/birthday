@@ -24,10 +24,10 @@ function App() {
       comment: "암튼 머 할말이없네",
     },{
       id: 5,
-      comment: "서울 갔을 때 ㄹㅇ좋았다",
+      comment: "나는 니가 한다면 하는 남자라서 좋다!",
     },{
       id: 6,
-      comment: "같이 있어서 더 잼있었는듯",
+      comment: "그래서 서울도 갈수있었는듯",
     },{
       id: 7,
       comment: "앞으로도 많은 경험 해보자",
@@ -44,8 +44,14 @@ function App() {
     },
   ])
 
+  const [test,setTest] = useState({
+    id:{
+      test:1
+    }
+  })
 
-  const scrollRef = useRef()
+
+  const userRef = useRef()
 
 
   const [current,setCurrent] = useState(0)
@@ -54,16 +60,13 @@ function App() {
       // const 
   // }
 
-  let trigger = true
+  const [trigger,setTrigger] = useState(true)
+
   function handleScroll(e){
     if (trigger){
-      // settingCurrent();
-      console.log(e.target.getBoundingClientRect())
-      // console.log(scrollRef.current.getBoundingClientRect())
-      // console.log(e.pageYOffset)
-      trigger = false
+      setTrigger(false)
       setTimeout(() => {
-        trigger = true
+        setTrigger(true)
       },1000)
     }
   }
@@ -72,13 +75,13 @@ function App() {
     <div 
     className="container"
     onScroll={handleScroll}
-    ref={scrollRef}
     >
       {
         pages.map((page) => (
           <div 
           key={page.id}
           className="item"
+          onMouseOver={() => setCurrent(page.id)}
           >
             <img src={require(`./images/background/pbk${page.id+1}.jpg`)} className="itemImg"/>
             <h1>{page.comment}</h1>
@@ -86,12 +89,15 @@ function App() {
         ))
       }
 
-      {/* <div className="user">
+      <div 
+      className="user"
+      style={{top:current * (window.innerHeight) + 550}}
+      >
         <div>
-          
+          {current+1} 페이지
         </div>
         <img src={pbk}/>
-      </div> */}
+      </div>
     </div>
   );
 }
