@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;500&family=Pacifico&display=swap");
+
+.header {
+    padding-top: 110px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .path {
+    fill: none;
+    stroke: #000;
+    stroke-width: 3px;
+  }
+  
+  .path1 {
+    stroke-dasharray: 6884;
+    animation: drawPath1 1s linear, floating 2.2s linear infinite;
+  }
+  
+  .path2 {
+    stroke: #000;
+  }
+  
+  .content2 {
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255, 0.25), rgba(255,255,255, 0.25) 1px, transparent 1px, transparent 7px);
+      background-size: 2px;
+  }
+
+
+  /* @keyframes drawPath1 {
+    0% {
+      stroke-dashoffset: 6884;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  } */
+  
+  @keyframes floating {
+    50% {
+      transform: translate3d(0, 40px, 0);
+    }
+  }
+  
+  /* css for my tutorial channel link */
+  #tube {position: fixed; bottom: 1vw; right: 1vw; opacity: 0.4;}
+  #tube:hover { opacity: 1; } #tube >img { height: 3rem; }
