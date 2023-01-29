@@ -1,0 +1,363 @@
+@import '../../style/variables';
+
+
+@mixin sideMark($width, $height) {
+    position: absolute;
+    background-color: gray;
+    width: $width;
+    height: $height;
+}
+
+@mixin button($height, $left-radius, $top-redius, $right-redius, $bottom-redius) {
+    height: $height;
+    width: 3px;
+    position: absolute;
+    border: 0px;
+    padding: 0px;
+    border-radius: $left-radius $top-redius $right-redius $bottom-redius;
+}
+
+@keyframes scrollDownAni {
+    from {stroke-dashoffset : 114px;}
+    to {stroke-dashoffset : -114px;}
+ }
+
+iphone-div {
+
+    margin: 60px;
+    display: block;
+    width: 400px;
+    aspect-ratio: 1/2;
+    background-color: silver;
+    border-radius: 65px;
+    position: fixed;
+
+    padding: 3px;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    .sideMark1 {
+        @include sideMark(3px, 15px);
+    }
+
+    .sideMark2 {
+        @include sideMark(15px, 3px);
+    }
+
+    .muteButton {
+        @include button(25px, 7px, 0px, 0px, 7px);
+        top: 170px;
+        left: -3px;
+    }
+
+    .volumeUpButton {
+        @include button(50px, 7px, 0px, 0px, 7px);
+        top: 225px;
+        left: -3px;
+    }
+
+    .volumeDownButton {
+        @include button(50px, 7px, 0px, 0px, 7px);
+        top: 290px;
+        left: -3px;
+    }
+
+    .powerButton {
+        @include button(90px, 0px, 7px, 7px, 0px);
+        top: 260px;
+        right: -3px;
+    }
+
+
+
+    .bezel {
+        width: 100%;
+        height: 100%;
+        border-radius: 63px;
+        background-color: black;
+        padding: 13px;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .noticeScroll{
+        position: absolute;
+        top:0px;
+        left:0px;
+        width:100%;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &>div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .scrollDownPath{
+                stroke-dasharray: 114; 
+                stroke-width:2;
+                fill: none;
+                stroke:#ffffff;
+                animation: scrollDownAni 2s linear .0s infinite;
+            }
+            h3{
+                color:white;
+            }
+        }
+    }
+
+    .chattingBar {
+        width: calc(100% - 26px);
+        position: absolute;
+        left: 13px;
+        bottom: 13px;
+        z-index: 2;
+
+        margin-top: 20px;
+        // width:100%;
+        display: flex;
+
+        &>div {
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0px 0px 50px 50px;
+
+            &>.inputWrapper {
+                width: 100%;
+                margin-top: 5px;
+                display: flex;
+                align-items: center;
+
+                >img {
+                    width: 35px;
+                    margin: 0px 7px;
+                }
+
+                >.chatInput {
+                    box-sizing: border-box;
+                    border: 1px solid lightgray;
+                    outline: none;
+                    background-color: rgb(240, 240, 240);
+                    width: 100%;
+                    height: 37px;
+                    margin-right: 10px;
+                    border-radius: 30px;
+                    padding-left: 15px;
+                    caret-color: rgb(0, 90, 179);
+                    font-size: 15px;
+
+                }
+            }
+        }
+    }
+
+
+    // 톡방의 헤더
+    .contentHeader {
+        height: 90px;
+        width: calc(100% - 26px);
+        // background-color:var(--displayColor);
+        opacity: 0.8;
+        position: absolute;
+        left: 13px;
+        top: 13px;
+        border-radius: 50px 50px 0px 0px;
+        z-index: 2;
+    }
+
+
+    .display {
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        // overflow-y: auto;
+        overflow-y: hidden;
+
+        &::-webkit-scrollbar{display: none;}
+
+        .contentTemp {
+            width: 100%;
+            margin-top: 90px;
+        }
+
+        .content {
+            width: 100%;
+            margin-top: 20px;
+            // 처음엔 보이지 않게 한다
+            display: flex;
+        }
+
+        // static일 땐 opacity 가 0이다
+        .static {
+            opacity: 0;
+        }
+
+
+        .otherContent {
+            .profile {
+                width: 35px;
+                height: 35px;
+                border-radius: 10px;
+                object-fit: cover;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .otherTextWrapper {
+                // 유저이름
+                max-width: 70%;
+
+                .otherUser {
+                    font-size: 13px;
+                }
+
+                // 유저 텍스트
+                .otherText {
+                    margin-top: 7px;
+                    background-color: white;
+                    font-size: 14px;
+                    border-radius: 5px;
+                    padding: 5px 7px 7px 7px;
+                    color: $kakaoFontColor;
+                    line-height: 1.3rem;
+                    position: relative;
+                    z-index: 1;
+
+                    .otherTextDeco {
+                        z-index: -1;
+                        position: absolute;
+                        left: -7px;
+                        top: 5px;
+                        width: 0px;
+                        height: 0px;
+                        border-radius: 5px;
+                        border-top: 12px solid white;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                    }
+                }
+            }
+        }
+
+        .myContent {
+            justify-content: flex-end;
+
+            .myText {
+                padding: 5px 7px 7px 7px;
+                margin-right: 15px;
+                max-width: 70%;
+                font-size: 14px;
+                border-radius: 5px;
+                background-color: $kakaoMain;
+                color: $kakaoFontColor;
+                line-height: 1.3rem;
+                position: relative;
+                z-index: 1;
+
+                .myTextDeco {
+                    width: 0px;
+                    height: 0px;
+                    border-radius: 5px;
+                    border-top: 12px solid $kakaoMain;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    position: absolute;
+                    z-index: -1;
+                    right: -7px;
+                    top: 5px;
+                }
+            }
+        }
+
+        
+        .chattingBarTemp{
+            margin-top: 100px;
+            height:100px;
+            width:100%;
+        }
+
+    }
+
+    .dynamicIslandWrapper {
+        z-index: 3;
+        position: absolute;
+        width: 100%;
+        height: 55px;
+        left: 0px;
+        top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+
+        .dynamicIsland {
+            box-sizing: border-box;
+            width: 110px;
+            height: 30px;
+            border-radius: 30px;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 8px;
+
+            .selfCamera {
+                height: 100%;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                background-color: rgb(26, 24, 24);
+
+                .selfCameraLens {}
+            }
+        }
+    }
+
+    .HomeIndicatorWrapper {
+        position: absolute;
+        left: 0px;
+        bottom: 15px;
+        z-index: 3;
+        width:100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        &>div{
+            width: 140px;
+            height: 5px;
+            background-color: black;
+            margin-bottom: 7px;
+            border-radius: 5px;
+        }
+    }
+}
+
+.customScrollBarWrapper{
+    position: absolute;
+    top:103px;
+    right:13px;
+    &>div{
+        width:7px;
+        height:576px;
+        position: relative;
+        >.scrollGaugeThumb{
+            opacity: 0;
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+            // height는 js로 변경
+            height:100px;
+            width:4px;
+            border-radius: 5px;
+            background-color: gray;
+        }
+    }
+}
