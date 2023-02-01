@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+    <style>
+        @keyframes noticeScrollDown {
+            from {
+                transform: translateY(20px);
+            }
+
+            to {
+                transform: translateY(-20px);
+            }
+        }
+
+        * {
+            font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+        }
+
+        body {
+            height: 900vh;
+            margin: 0px;
+            /* color:white; */
+            background-color: black;
+
+        }
+
+        .comment {
+            /* font-size: 80px;
+            margin:0px;
+            mix-blend-mode: difference;
+            color:black; */
+            /* mix-blend-mode: exclusion; */
+            border-radius: 50%;
+            color: white;
+            display: block;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 6vw;
+
+        }
+
+        .section {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background: url("./2brojin.png");
+        }
+
+        .scrollDown {
+            width: 200px;
+            z-index: 1;
+            animation: 1s infinite alternate noticeScrollDown;
+        }
+
+        .blur {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .middleComment{
+            color:white;
+            font-size: 70px;
+        }
+        .finalSection{
+            position: absolute;
+            bottom:0px;
+            width:100%;
+            height:100vh;
+            z-index: 1;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .finalSection > h1{
+            font-size: 100px;
+            margin: 0px;
+        }
+        .finalSection > h3{font-size: 60px;}
+    </style>
+
+    <div class="section">
+        <div class="blur">
+            <h1 class="middleComment" >스크롤 천천히 내려보셈</h1>
+            <img class="scrollDown" src="./downSvg.svg" />
+        </div>
+        <h1 class="comment">데헷 얘뜰아 나 생일이야</h1>
+    </div>
+    <div class="finalSection">
+        <h1>
+            생일 축하합니다 형님  
+        </h1>
+        <h3>
+            형 성격상, 길게 말하는거 없이 스크롤 내려보십쇼
+        </h3>
+    </div>
+
+    <script>
+
+        const comment = document.querySelector(".comment")
+        const blurElement = document.querySelector(".blur");
+        const documentHeight = document.documentElement.clientHeight
+        blurElement.style.backdropFilter = "blur(70px)"
+
+        const middleComment = document.querySelector(".middleComment")
+        const scrollImg = document.querySelector(".scrollDown")
+
+        window.addEventListener('scroll',renderFunction)
+
+        function renderFunction(){
+            const scroll = window.scrollY
+            // console.log(scroll)
+            const blurCalc = 70 - (Math.round(scroll / documentHeight) * 10)
+            blurElement.style.backdropFilter = `blur(${blurCalc}px)`
+            console.log(blurElement.style.backdropFilter)
+
+            if (blurCalc < 30 && blurCalc > 0) {
+                middleComment.style.opacity = 1;
+                scrollImg.style.opacity = 1;
+                middleComment.innerHTML = "감이 오시나요?"
+            }
+            else if (blurCalc === 0){
+                middleComment.style.opacity = 0;
+                scrollImg.style.opacity = 0;
+            } else {
+                middleComment.innerHTML = "스크롤 천천히 내려보셈"
+            }
+        }
+    </script>
+</body>
+
+</html>
